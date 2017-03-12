@@ -1,0 +1,50 @@
+.progressiveContainer {
+    position: relative;
+    width: 100%;
+}
+
+.progressivePlaceholder {
+    position: relative;
+}
+
+.progressiveCanvas,
+.progressiveFull,
+.progressiveMedia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.progressiveThumb {
+    display: none;
+}
+
+.opacityZero {
+    opacity: 0;
+    transition: 500ms;
+}
+
+.opacityOne {
+    opacity: 1;
+    transition: 500ms;
+}
+
+.aspectRatio_1_1 {
+    padding-bottom: 100%;
+}
+
+.aspectRatio_4_3 {
+    padding-bottom: 75%;
+}
+
+.aspectRatio_16_9 {
+    padding-bottom: 56.25%;
+}
+
+.aspectRatio_16_10 {
+    padding-bottom: 62.5%;
+}
+
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Progressive Rendering</title>
+    <link rel="stylesheet" type="text/css" href="/css/progressive.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Progressive Rendering Test</h1>
+        <div class="progressiveContainer">
+            <!-- Need to know height and width for placeholder (prevents reflow) -->
+            <div class="progressivePlaceholder" style="max-width: 1920px; max-height: 1200px;">
+                <div class="aspectRatio_16_10">
+                    <img src="/img/test-thumb.png" class="progressiveThumb" data-full="/img/test-full.jpg" />
+                    <canvas class="progressiveCanvas opacityOne"></canvas>
+                    <noscript>
+                        <img src="/img/test-full.jpg" class="progressiveFull opacityOne" />
+                    </noscript>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>Blah</h2>
+            <p>
+                Blah blah blah blah blah blah blah. 
+                Blah blah blah blah blah blah blah. 
+                Blah blah blah blah blah blah blah.
+            </p>
+            <h3>Blah</h3>
+            <ul>
+                <li>blah blah blah</li>
+                <li>blah blah blah</li>
+                <li>blah blah blah</li>
+                <li>blah blah blah</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/js/blur.js" type="text/javascript"></script>
+    <script src="/js/progressive.js" type="text/javascript"></script>
+</body>
+</html>
