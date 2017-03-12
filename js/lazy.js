@@ -1,7 +1,6 @@
 ;(function (root) {
     if (typeof root.Lazy !== 'undefined') return // :(
 
-    var Lazy
     var lastKnownScrollPosition = 0
     var ticking = false
     var LAZY_CONSTS = Object.freeze({
@@ -127,11 +126,9 @@
         }
     }
 
-    Lazy = Object.freeze({
+    root.Lazy = Object.freeze({
         loadImage: loadImage,
         getImagesToLazyLoad: getImagesToLazyLoad,
         createHandleScroll: createHandleScroll
     })
-
-    root.Lazy = Lazy
 })(this)

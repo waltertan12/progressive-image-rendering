@@ -1,5 +1,4 @@
-;
-(function (root) {
+;(function (root) {
     'use strict'
 
     if (typeof root.StackBlur !== 'undefined') return // :(
@@ -542,7 +541,6 @@
         this.next = null;
     }
 
-    StackBlur = { blur: stackBlurImage }
-    Object.freeze(StackBlur)
-    root.StackBlur = StackBlur
+    root.StackBlur = Object.freeze({ blur: stackBlurImage })
+
 })(this);
