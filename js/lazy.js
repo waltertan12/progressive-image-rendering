@@ -1,14 +1,23 @@
 ;(function (root) {
     if (typeof root.Lazy !== 'undefined') return // :(
 
-    var lastKnownScrollPosition = 0
-    var ticking = false
+    /**
+     * @type {Object}
+     */
     var LAZY_CONSTS = Object.freeze({
         className: 'lazy',
         scroll: 'scroll',
         load: 'load',
         error: 'error',
     })
+
+    /**
+     * Used to throttle scroll event
+     * 
+     * @see  createHandleScroll
+     * @type {Boolean}
+     */
+    var ticking = false
 
     /**
      * Returns true if the given element is in the viewport
@@ -95,8 +104,6 @@
         var numberOfImagesToLoad = images.length
 
         return function handleScroll(event) {
-            lastKnownScrollPosition = window.scrollY;
-
             // Throttle the scroll listener
             if (!ticking) {
                 root.requestAnimationFrame(function() {
@@ -113,7 +120,7 @@
                                 callback(image)
                             }
 
-                            numberOfImagesToLoad--  // FIXME: Should do this asynchronously
+                            numberOfImagesToLoad--  // FIXME: Should probably do this asynchronously
                                                     //        on the image 'load' event
                         }
                     })
@@ -131,4 +138,5 @@
         getImagesToLazyLoad: getImagesToLazyLoad,
         createHandleScroll: createHandleScroll
     })
+    
 })(this)
