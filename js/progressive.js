@@ -28,7 +28,7 @@
                 var fragment
                 var imageFull
 
-                root.StackBlur.blur(imageThumb, canvas, 3, true)
+                root.StackBlur.blur(imageThumb, canvas, 3)
 
                 // Create new image element to insert
                 imageFull = document.createElement('img')
