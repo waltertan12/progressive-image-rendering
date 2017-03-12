@@ -1,4 +1,7 @@
+/* globals Promise */
 ;(function (root) {
+    'use strict'
+
     if (typeof root.Lazy !== 'undefined') return // :(
 
     /**
@@ -27,8 +30,8 @@
      */
     var elementInViewport = function elementInViewport(element) {
         var rect = element.getBoundingClientRect()
-        var vWidth = window.innerWidth || doc.documentElement.clientWidth
-        var vHeight = window.innerHeight || doc.documentElement.clientHeight
+        var vWidth = window.innerWidth || root.documentElement.clientWidth
+        var vHeight = window.innerHeight || root.documentElement.clientHeight
 
         // Return false if it's not in the viewport
         if (rect.right < 0 || rect.bottom < 0 || rect.left > vWidth || rect.top > vHeight)
@@ -56,12 +59,12 @@
 
             imageElement.src = src
 
-            imageElement.addEventListener('load', function loadImageSuccessHandler(event) {
+            imageElement.addEventListener('load', function loadImageSuccessHandler() {
                 imageElement.removeEventListener(LAZY_CONSTS.load, loadImageSuccessHandler, false)
                 resolve(imageElement)
             })
 
-            imageElement.addEventListener('error', function loadImageErrorHandler(event) {
+            imageElement.addEventListener('error', function loadImageErrorHandler() {
                 imageElement.removeEventListener(LAZY_CONSTS.error, loadImageErrorHandler, false)
                 reject(imageElement)
             })
@@ -75,7 +78,7 @@
      * @return {Element[]}
      */
     var getImagesToLazyLoad = function getImagesToLazyLoad(className) {
-        if (typeof className === 'undefined') {
+        if (typeof className !== 'string') {
             className = LAZY_CONSTS.className
         }
 
