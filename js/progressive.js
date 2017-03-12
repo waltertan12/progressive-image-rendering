@@ -1,5 +1,6 @@
 ;(function (root) {
     'use strict'
+    
     if (typeof root.Lazy === 'undefined') {
         throw 'Requires the Lazy library'
     }
@@ -16,7 +17,7 @@
         progressiveFull: 'progressiveFull',
         progressiveCanvas: 'progressiveCanvas',
         opacityOne: 'opacityOne',
-        opactiyZero: 'opacityZero'
+        opacityZero: 'opacityZero'
     })
 
     var imageToLazyLoad = root.Lazy.getImagesToLazyLoad()
@@ -27,12 +28,15 @@
                 var fragment
                 var imageFull
 
-                root.StackBlur.blur(imageThumb, canvas, 5, true)
+                root.StackBlur.blur(imageThumb, canvas, 3, true)
 
                 // Create new image element to insert
                 imageFull = document.createElement('img')
                 imageFull.src = imageThumb.getAttribute('data-full')
-                imageFull.className = 'progressiveFull opacityZero'
+                imageFull.className = [
+                        PROGRESSIVE_CONSTS.progressiveFull, 
+                        PROGRESSIVE_CONSTS.opacityZero
+                    ].join(' ')
                 fragment = document.createDocumentFragment()
                 fragment.appendChild(imageFull)
 
@@ -40,8 +44,14 @@
                 imageFull.addEventListener(PROGRESSIVE_CONSTS.load, function loadFullSuccessListener() {
                     imageFull.removeEventListener(PROGRESSIVE_CONSTS.load, loadFullSuccessListener)
 
-                    imageFull.className = 'progressiveFull opacityOne'
-                    canvas.className = 'progressiveCanvas opacityZero'
+                    imageFull.className = [
+                        PROGRESSIVE_CONSTS.progressiveFull, 
+                        PROGRESSIVE_CONSTS.opacityOne
+                    ].join(' ')
+                    canvas.className = [
+                        PROGRESSIVE_CONSTS.progressiveCanvas, 
+                        PROGRESSIVE_CONSTS.opacityZero
+                    ].join(' ')
                 })
 
                 canvas.parentElement.appendChild(fragment)
