@@ -1,6 +1,8 @@
 # Progressive Image Rendering
 This repository holds an implentation of Medium's progressive image rendering
 
+[Demo](https://waltertan12.github.io/progressive-image-rendering/)
+
 ## Steps
 1. Load a small version of the full image
 2. Once the small image is loaded
