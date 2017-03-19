@@ -142,7 +142,12 @@
         var shgSum = shgTable[radius]
 
         for (y = 0; y < height; y++) {
-            rInSum = gInSum = bInSum = rSum = gSum = bSum = 0
+            rInSum = 0
+            gInSum = 0
+            bInSum = 0
+            rSum = 0
+            gSum = 0
+            bSum = 0
 
             rOutSum = radiusPlus1 * (pr = pixels[yi])
             gOutSum = radiusPlus1 * (pg = pixels[yi + 1])
@@ -219,7 +224,12 @@
 
 
         for (x = 0; x < width; x++) {
-            gInSum = bInSum = rInSum = gSum = bSum = rSum = 0
+            gInSum = 0
+            bInSum = 0
+            rInSum = 0
+            gSum = 0
+            bSum = 0
+            rSum = 0
 
             yi = x << 2
             rOutSum = radiusPlus1 * (pr = pixels[yi])
