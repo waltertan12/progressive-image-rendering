@@ -52,12 +52,6 @@
      * @return {Promise}
      */
     var loadImage = function loadImage(imageElement) {
-        if (imageElement.getAttribute('src') !== '') {
-            return new Promise(function(resolve, reject) {
-                resolve()
-            })
-        }
-
         if (imageElement.getAttribute('data-src') === '') {
             throw 'Image element does not have a data-src attribute'
         }
