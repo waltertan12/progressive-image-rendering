@@ -9,6 +9,7 @@
      */
     var LAZY_CONSTS = Object.freeze({
         className: 'lazy',
+        complete: 'complete',
         scroll: 'scroll',
         load: 'load',
         error: 'error',
@@ -48,8 +49,15 @@
      * Lazy loads a specific image element
      * 
      * @param  {Element} imageElement
+     * @return {Promise}
      */
     var loadImage = function loadImage(imageElement) {
+        if (imageElement.getAttribute('src') !== '') {
+            return new Promise(function(resolve, reject) {
+                resolve()
+            })
+        }
+
         if (imageElement.getAttribute('data-src') === '') {
             throw 'Image element does not have a data-src attribute'
         }
@@ -114,9 +122,11 @@
                         event.target.removeEventListener(LAZY_CONSTS.scroll, handleScroll)
 
                     images.forEach(function (image) {
-                        if (image.src) return
+                        if (image.className.indexOf(LAZY_CONSTS.complete) >= 0) return
 
                         if (elementInViewport(image.parentElement)) {
+                            image.className += LAZY_CONSTS.complete
+
                             if (typeof callback !== 'function') {
                                 loadImage(image)
                             } else {

@@ -20,10 +20,11 @@
         opacityZero: 'opacityZero'
     })
 
-    var imageToLazyLoad = root.Lazy.getImagesToLazyLoad()
-    var handleScroll = root.Lazy.createHandleScroll(imageToLazyLoad, function (image) {
-        root.Lazy.loadImage(image)
-            .then(function (imageThumb) {
+    var imagesToLazyLoad = root.Lazy.getImagesToLazyLoad()
+    var handleScroll = root.Lazy.createHandleScroll(imagesToLazyLoad, function (image) {
+        // root.Lazy.loadImage(image)
+        //     .then(function (imageThumb) {
+                var imageThumb = image
                 var canvas = imageThumb.nextElementSibling
                 var fragment
                 var imageFull
@@ -55,10 +56,10 @@
                 })
 
                 canvas.parentElement.appendChild(fragment)
-            })
-            .catch(function (data) {
-                console.warn(data)
-            })
+            // })
+            // .catch(function (data) {
+            //     console.warn(data)
+            // })
     })
 
     document.addEventListener(PROGRESSIVE_CONSTS.scroll, handleScroll)
