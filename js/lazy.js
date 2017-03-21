@@ -13,6 +13,7 @@
         scroll: 'scroll',
         load: 'load',
         error: 'error',
+        fullSrc: 'data-src'
     })
 
     /**
@@ -57,16 +58,16 @@
         }
 
         return new Promise(function loadImagePromise(resolve, reject) {
-            var src = imageElement.getAttribute('data-src')
+            var src = imageElement.getAttribute(LAZY_CONSTS.fullSrc)
 
             imageElement.src = src
 
-            imageElement.addEventListener('load', function loadImageSuccessHandler() {
+            imageElement.addEventListener(LAZY_CONSTS.load, function loadImageSuccessHandler() {
                 imageElement.removeEventListener(LAZY_CONSTS.load, loadImageSuccessHandler, false)
                 resolve(imageElement)
             })
 
-            imageElement.addEventListener('error', function loadImageErrorHandler() {
+            imageElement.addEventListener(LAZY_CONSTS.error, function loadImageErrorHandler() {
                 imageElement.removeEventListener(LAZY_CONSTS.error, loadImageErrorHandler, false)
                 reject(imageElement)
             })
@@ -98,6 +99,13 @@
         return images
     }
 
+    var validateOption = function validateOption(original, option) {
+        if (typeof option === string && option !== '') 
+            return option
+
+        return original 
+    }
+
     /**
      * Creates a callback to pass to a scroll listener
      * 
@@ -105,8 +113,14 @@
      * @param  {Function}   callback
      * @return {Function}
      */
-    var createHandleScroll = function createHandleScroll(images, callback) {
+    var createHandleScroll = function createHandleScroll(images, callback, options) {
         var numberOfImagesToLoad = images.length
+
+        if (typeof options === 'object') {
+            LAZY_CONSTS.className = validateOption(LAZY_CONSTS.className, options.className)
+            LAZY_CONSTS.complete = validateOption(LAZY_CONSTS.complete, options.complete)
+            LAZY_CONSTS.fullSrc = validateOption(LAZY_CONSTS.fullSrc, options.fullSrc)
+        }
 
         return function handleScroll(event) {
             // Throttle the scroll listener
@@ -136,7 +150,7 @@
                 })
             }
 
-            ticking = true;
+            ticking = true
         }
     }
 
